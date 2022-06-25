@@ -4,7 +4,7 @@ const {format} = require('date-fns')
 const {reqHeaders} = require('./config')
 
 
-const getData = async(baseURL)=>{
+const getData = async(baseURL,buyPrice)=>{
     const {data} = await axios.get(baseURL,reqHeaders)
     
     const $ = cheerio.load(data)
@@ -20,6 +20,7 @@ const getData = async(baseURL)=>{
         title,
         textPrice,
         floatPrice,
+        buyPrice,
         image,
         date: format(new Date(),'dd/MM/yyyy HH:mm:ss')
     })

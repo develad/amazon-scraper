@@ -8,10 +8,12 @@ const PORT = process.env.PORT || 5000
 
 app.get('/',(req,res)=>{
     
-    const arr = baseURLs.map(item=>getData(item.baseURL))
+    const arr = baseURLs.map(item=>getData(item.baseURL,item.buyPrice))
 
     Promise.allSettled(arr).then(data=>{
-        res.status(200).json(data.map(item=>item.value))
+        const items = data.map(item=>item.value)
+        const brr = items.filter(item=> item.buyPrice > item.floatPrice ? true : false) 
+        res.status(200).json(brr)
     })
 })
 
