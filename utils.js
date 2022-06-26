@@ -33,15 +33,13 @@ const allitems = (itemsArr) =>{
 })
 }
 const filterToBuyPrice = (itemsArr) =>{
-    return Promise.allSettled(itemsArr).then(data=>{
-        const items = data.map(item=>item.value)
-        const filteredItemsArr = items.filter(item=> item.buyPrice > item.floatPrice ? true : false)
+        const filteredItemsArr = itemsArr.filter(item=> item.buyPrice > item.floatPrice ? true : false)
         return filteredItemsArr
-})
+
 }
 
-const scarpeData = (baseURLs) =>{
-   return baseURLs.map(item=>getData(item.baseURL,item.buyPrice))
+const scarpeData = async (baseURLs) =>{
+    return await allitems(baseURLs.map(item=>getData(item.baseURL,item.buyPrice)))
 } 
 
 module.exports = {
