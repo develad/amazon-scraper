@@ -8,9 +8,9 @@ const PORT = process.env.PORT || 5000
 
 app.get('/',async (req,res)=>{
     
-    const itemScrapted = baseURLs.map(item=>getData(item.baseURL,item.buyPrice))
-    const itemInBuyPriceRange = await filterToBuyPrice(itemScrapted)
-    res.status(200).json(itemInBuyPriceRange)
+    const itemsScrapted = baseURLs.map(item=>getData(item.baseURL,item.buyPrice))
+    const itemsInBuyPriceRange = await filterToBuyPrice(itemsScrapted)
+    res.status(200).json(itemsInBuyPriceRange)
 })
 
 app.listen(PORT,()=>{
