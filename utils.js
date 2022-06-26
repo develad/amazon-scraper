@@ -26,6 +26,15 @@ const getData = async(baseURL,buyPrice)=>{
     })
 }
 
+const filterToBuyPrice = (itemsArr) =>{
+    return Promise.allSettled(itemsArr).then(data=>{
+        const items = data.map(item=>item.value)
+        const filteredItemsArr = items.filter(item=> item.buyPrice > item.floatPrice ? true : false)
+        return filteredItemsArr
+})
+}
+
 module.exports = {
-    getData
+    getData,
+    filterToBuyPrice
 }

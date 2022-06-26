@@ -1,20 +1,16 @@
 const express = require('express')
 const {baseURLs} = require('./config')
-const {getData} = require('./utils')
+const {getData, filterToBuyPrice} = require('./utils')
 
 const app = express()
 
 const PORT = process.env.PORT || 5000
 
-app.get('/',(req,res)=>{
+app.get('/',async (req,res)=>{
     
-    const arr = baseURLs.map(item=>getData(item.baseURL,item.buyPrice))
-
-    Promise.allSettled(arr).then(data=>{
-        const items = data.map(item=>item.value)
-        const brr = items.filter(item=> item.buyPrice > item.floatPrice ? true : false) 
-        res.status(200).json(brr)
-    })
+    const itemScrapted = baseURLs.map(item=>getData(item.baseURL,item.buyPrice))
+    const itemInBuyPriceRange = await filterToBuyPrice(itemScrapted)
+    res.status(200).json(itemInBuyPriceRange)
 })
 
 app.listen(PORT,()=>{
