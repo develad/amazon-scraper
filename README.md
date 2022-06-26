@@ -1,9 +1,12 @@
 # Amazon Scraper powerd by express.js
 
 ### To use this project you need to do the following steps:
-    * npm i
-    * set the URL'S of the Amazon products  and the maximum buyPrice in the config.js file
-    * npm run dev
+
+* run npm i command in the terminal
+
+* set the URL'S of the Amazon products and the maximum buyPrice in the config.js file
+
+* run npm run dev command in the terminal
 
 ## there are 2 routes:
 1) http://localhost:5000/allitems for all the products that were being scrapted
